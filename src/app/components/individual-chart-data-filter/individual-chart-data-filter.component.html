@@ -1,0 +1,29 @@
+<div class="x_panel tile">
+
+    <div class="x_title" style="padding: 1px 5px 5px;">
+      <h2 style="margin-right: 10px;">{{containerData.containerTitle}} by</h2>
+      <select class="form-control" style="width:120px;float:left;" [ngModel]="filter" (ngModelChange)="onChange($event)">
+          <option value="clinicalUnit">Clinical Unit</option>
+          <option value="admitType">Admit Type</option>
+          <option value="cohort">Cohort</option>
+        </select>
+
+      <div class="clearfix"></div>
+    </div>
+    <div *ngIf="hasData" id="loader-wrapper" class="loader" style="display: block;">
+      <div style="position: absolute;width: 250px;top: 30%;left: 40%;margin-left: -43px;margin-top: -43px;z-index: 1000;display: block;">
+      <img src="./assets/images/FC_Loader.gif" style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+    <div class="x_content" style="height:350px">
+        <fusioncharts
+        width="100%"
+        height="100%"
+        type="column2d"
+        [dataSource]="dataSource"
+        (initialized)="initialized($event)">
+        </fusioncharts>
+    </div>
+
+  </div>
+

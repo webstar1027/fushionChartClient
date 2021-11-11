@@ -1,0 +1,49 @@
+{
+  "apiurl" : "http://localhost:8081/getFilteredData",
+  "startdate" : "6/1/2010",
+  "enddate" : "7/31/2010",
+  "mindate" : "1/1/2009",
+  "maxdate" : "8/31/2010",
+  "colorPallet" :{
+    "Emergency" : "#29577b",
+    "Elective" : "#35c09c",
+    "Urgent" : "#f6ce49",
+    "Cohort" : "#ea9949",
+    "Clinic" : "#ea9949"
+  },
+  "ageGroups":{
+    "Infant" : {
+      "min" : 0,
+      "max" : 1
+    },
+    "Toddler" : {
+      "min" : 2,
+      "max" : 3
+    },
+    "Child" : {
+      "min" : 4,
+      "max" : 9
+    },
+    "Pre-teen" : {
+      "min" : 10,
+      "max" : 12
+    },
+    "Teenage" : {
+      "min" : 13,
+      "max" : 18
+    },
+    "Adult" :{
+      "min" : 19,
+      "max" : 100
+    }
+  },
+  "reasons" :{
+    "0" : "Serious medical conditions",
+    "1" : "Additional cost",
+    "2" : "Recurring ED/primary care visits",
+    "3" : "Overcrowded EDs",
+    "4" : "Leaving without complete evaluation",
+    "5" : "Insufficient Bed",
+    "6" : "Inaccurate facility"
+  }
+}

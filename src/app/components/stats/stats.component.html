@@ -1,0 +1,12 @@
+<div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count statscont">
+  <a href="#" (click)="talkBack(id)">
+    <div class="stat-container statContainer {{ class }}">
+        <span class="count_top"><i class="fa {{statConfig.icon}}"></i> {{statConfig.title}}</span>
+        <div class="count" *ngIf = "hasData" >
+            <img  src="./assets/images/loader.gif" style="max-width: 100px; height: 20px;"/>
+        </div>
+        <div class="count" *ngIf = "!hasData" >{{count}}<span>{{ extension }}</span></div>
+    </div>
+  </a>
+</div>
+

@@ -1,0 +1,125 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<!-- top navigation -->
+<div class="">
+  <div class="row container-fluid">
+    <div class="col-xs-7 col-sm-7 col-md-8 dash-header">
+      <h2 class="dashboard-heading">{{title}}</h2>
+    </div>
+    <div class="col-xs-5 col-sm-5 col-md-4 date-selector text-center">
+        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 10px 25px; border: 1px solid #ccc">
+          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          <span>{{ completeDate }}</span> <b class="caret"></b>
+        </div>
+      </div>
+  </div>
+  <div class="row tile_count">
+    <app-stats [statConfig]="admissionStatConfig"  [filteredData] = "filteredtotalAdmissionData" [loader] = "loader" id="admission" (talk)="talkBack($event)" [class]="activeadv"></app-stats>
+    <app-stats [statConfig]="sameDayDischargeStatConfig"  [filteredData] = "sameDayDischargeData" [loader] = "loader" id="discharge" (talk)="talkBack($event)" [class]="activedis"></app-stats>
+    <app-stats [statConfig]="lwobsStatConfig"  [filteredData] = "filteredlwobsCountData" [loader] = "loader" id="lwobs" (talk)="talkBack($event)" [class]="activelwo"></app-stats>
+    <app-stats [statConfig]="avgadmissinDaysStatConfig"  [filteredData] = "avgadmissionDaysData" [loader] = "loader" id="avgadmission" (talk)="talkBack($event)" [class]="activeavg"></app-stats>
+  </div>
+</div>
+<div class="container body">
+  <div class="main_container">
+    <!-- /top navigation -->
+    <!-- page content -->
+    <div class="right_col" role="main" style="padding-top:30px">
+      <!-- top tiles -->
+      <!-- /top tiles -->
+      <div class="row" *ngIf="admission">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="departmentContainerData" [filteredData]="departmentFilteredData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="admissionDayWiseContainerData" [filteredData]="dailyFilteredData" [uniqueKeys]="filteredKeyElemntsData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+      </div>
+      <div class="row" *ngIf="admission">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="ageWiseContainerData" [filteredData]="ageWiseFilteredData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="cohortUnitContainerData" [filteredData]="departmentFilteredData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="clinitUnitContainerData" [filteredData]="departmentFilteredData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+      </div>
+
+      <div class="row" *ngIf = "lwobs" >
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="lwobsbyAdmitTypeData" [filteredData]="departmentLWOBSData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="lwobsDayWiseContainerData" [filteredData]="dailylwobsFilteredData" [uniqueKeys]="filteredKeyElemntsData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+      </div>
+      <div class="row" *ngIf = "lwobs" >
+          <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="lwobsbyCohortData" [filteredData]="departmentLWOBSData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div> -->
+
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="ageWiseLwobsContainerData" [filteredData]="ageLwobsData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div>
+          <div class="col-md-7 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="lwobsContainerbyReasonData" [filteredData]="departmentLWOBSData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div>
+          <!-- <div class="col-md-4 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="lwobsbyClinicData" [filteredData]="departmentLWOBSData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div> -->
+      </div>
+
+      <div class="row" *ngIf="avgadmission">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="losContainerData" [filteredData]="fullResult" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="lostop10ContainerData" [filteredData]="fullResult" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+      </div>
+      <div class="row" *ngIf="avgadmission">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="losageWiseContainerData" [filteredData]="ageWiseFilteredData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="loschorhotContainerData" [filteredData]="fullResult" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="losclinicContainerData" [filteredData]="fullResult" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="discharge">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="dischargedepartmentContainerData" [filteredData]="departmentDischargeddData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+          <app-individual-chart-data [containerData]="dischageDayWiseContainerData" [filteredData]="dailyldischrgedFilteredData" [uniqueKeys]="filteredKeyElemntsData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+        </div>
+      </div>
+      <div class="row" *ngIf = "discharge" >
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="ageWiseDischargedContainerData" [filteredData]="ageDischargedData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="dischargebyCohortData" [filteredData]="departmentDischargeddData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <app-individual-chart-data [containerData]="dischargedbyClinicData" [filteredData]="departmentDischargeddData" [loaderChart] = "loaderChart"></app-individual-chart-data>
+          </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    <footer>
+      <div class="pull-right">
+          Pediatrics Center Dashboard by <a href="https://fusioncharts.com">Fusioncharts</a>
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+  </div>
+</div>
+
